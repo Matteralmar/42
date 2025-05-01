@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_print_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 15:00:57 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/04/14 15:48:04 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/04/22 17:39:42 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/04/22 17:51:45 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
-int ft_strcmp(char *s1, char *s2)
+int	main(int argc, char **argv)
 {
+	char	n;
+	int		i;
+	int		j;
 
-    while(*s1 && (*s1 == *s2))
-    {
-        s1++;
-        s2++;
-    }
-    return (unsigned char)*s1 - (unsigned char)*s2;
-
-}
-
-int main()
-{
-    char str1[] = "aahfdd";
-    char str2[] = "aafsd";
-    printf("%d",ft_strcmp(str1, str2));
+	if (argc > 1)
+	{
+		n = '\n';
+		i = 0;
+		j = 1;
+		while (argv[j])
+		{
+			while (argv[j][i])
+			{
+				write(1, &argv[j][i], 1);
+				i++;
+			}
+			write(1, &n, 1);
+			i = 0;
+			j++;
+		}
+	}
+	return (0);
 }

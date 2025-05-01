@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 14:05:33 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/04/16 15:29:00 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/04/24 12:06:54 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/04/24 12:17:41 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-//#include <stdio.h>
 
-char	*ft_strcat(char *dest, char *src)
+void	write_c(char c)
 {
-	int	i;
-	int	j;
+	write(1, &c, 1);
+}
 
-	i = 0;
-	j = 0;
-	while (dest[i])
-		i++;
-	while (src[j])
+void	ft_putnbr(int nb)
+{
+	if (nb < 0)
 	{
-		dest[i + j] = src[j];
-		j++;
+		if (nb == -2147483648)
+		{
+			write(1, "-2147483648", 11);
+			return ;
+		}
+		write_c('-');
+		nb = -nb;
 	}
-	dest[i + j] = '\0';
-	return (dest);
+	if (nb >= 10)
+		ft_putnbr(nb / 10);
+	write_c(nb % 10 + '0');
 }
-int main()
+
+/*
+int	main(void)
 {
-    char str1[] = "aahfdd";
-    char str2[6] = "aafsd";
-
-    char *result = ft_strcat(str1, str2);
-
-    printf("%s", result);
-
-    return 0;
+	ft_putnbr(-2147483648);
+	return (0);
 }
+*/

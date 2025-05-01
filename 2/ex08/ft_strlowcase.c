@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 15:57:48 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/04/14 16:01:47 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/04/14 10:56:57 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/04/14 12:39:51 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
-
-int ft_strcmp(char *s1, char *s2, unsigned int n)
+//#include <stdio.h>
+char	*ft_strlowcase(char *str)
 {
+	int	i;
 
-    while(*s1 && (*s1 == *s2))
-    {
-        s1++;
-        s2++;
-        n--;
-    }
-    if(n == 0)
-        return 0;
-    return (unsigned char)*s1 - (unsigned char)*s2;
-
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+		{
+			str[i] += 32;
+		}
+		i++;
+	}
+	return (str);
 }
-
-int main()
-{
-    char str1[] = "aahfdd";
-    char str2[] = "aafsd";
-    printf("%d",ft_strcmp(str1, str2, 3));
-}
+// int main()
+// {   
+//     char s[] = "ABC";
+// 	printf("%s", ft_strlowcase(s));
+//     return 0;
+// }

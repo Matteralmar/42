@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:22:52 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/04/16 15:46:09 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/04/16 14:05:33 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/04/16 14:54:32 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 //#include <stdio.h>
 
-char	*ft_strstr(char *str, char *to_find)
+char	*ft_strcat(char *dest, char *src)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (!*to_find)
-		return (str);
-	while (str[i])
-	{
-		j = 0;
-		while (to_find[j] && str[i + j] == to_find[j])
-			j++;
-		if (!to_find[j])
-			return (&str[i]);
+	j = 0;
+	while (dest[i])
 		i++;
+	while (src[j])
+	{
+		dest[i + j] = src[j];
+		j++;
 	}
-	return ((void *)0);
+	dest[i + j] = '\0';
+	return (dest);
 }
-int main()
-{
-    char str[]= "Helwor wor";
-    char to_find[3] = "or";
+// int main()
+// {
+//     char str1[11] = "aahfdd";
+//     char str2[] = "aafsd";
 
-    ft_strstr(str, to_find);
-    printf("%s", ft_strstr(str, to_find));
-}
+//     char *result = ft_strcat(str1, str2);
+
+//     printf("%s", result);
+
+//     return 0;
+// }
