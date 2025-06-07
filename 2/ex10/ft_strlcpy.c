@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:21:23 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/04/28 15:16:52 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/05/02 08:25:23 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ unsigned int	ft_strlcpy(char *dst, char *src, unsigned int size)
 	return (len);
 }
 
-// int main(void)
-// {
-//     char dest[20];
-//     const char *source = "Hello, World!";
-//     unsigned int copied = ft_strlcpy(dest, source, sizeof(dest));
+int main(void)
+{
+    char dest[20];
+    const char *source = "Hello, World!";
+    unsigned int copied = ft_strlcpy(dest, source, sizeof(dest));
 
-//     printf("Copied: %s\n", dest);
-//     printf("Source length: %u\n", copied);
-//     return 0;
-// }
+    printf("Copied: %s\n", dest);
+    printf("Source length: %u\n", copied);
+    return 0;
+}
