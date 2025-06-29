@@ -36,7 +36,9 @@ static	size_t	len_calc(long number)
 static char	*number_to_str(long number, size_t len)
 {
 	char	*str;
+	long	n;
 
+	n = number;
 	str = (char *)malloc(len + 1);
 	if (!str)
 		return (NULL);
@@ -53,7 +55,7 @@ static char	*number_to_str(long number, size_t len)
 		number /= 10;
 		len--;
 	}
-	if (str[0] != '-')
+	if (n >= 0)
 		str[0] = (number % 10) + '0';
 	return (str);
 }
