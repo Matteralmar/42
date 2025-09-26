@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 14:05:27 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/23 11:50:49 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/26 12:41:55 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ typedef struct  s_fract {
 
 void	init_fractal(t_fract *fractal);
 void	error_msg(int i);
-void draw(t_fract *fractal);
-int what_set(t_fract *fractal, char **av);
-int destroy(t_fract *fractal);
-int action(int key, t_fract *fractal);
-int mouse_hook(int button, int x, int y, void *param);
-void hooks(t_fract *fractal);
-void mandelbrot_set(t_fract *fractal);
+void    draw(t_fract *fractal);
+int     what_set(t_fract *fractal, char **av);
+int     destroy(t_fract *fractal);
+int     action(int action, t_fract *fractal);
+int     mouse_hook(int button, int x, int y, void *param);
+void    hooks(t_fract *fractal);
+void    mandelbrot_set(t_fract *fractal);
 #endif

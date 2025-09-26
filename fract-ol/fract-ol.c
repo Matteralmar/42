@@ -2,13 +2,12 @@
 
 void	init_fractal(t_fract *fractal)
 {
-	fractal->iter = 200;
+	fractal->iter = 40;
 	fractal->zoom = 1;
+	fractal->scale = WIDTH / (fractal->zoom * 4);
+	fractal->color = 0xccf1ff;
 	fractal->x = 0;
 	fractal->y = 0;
-	fractal->z_x = 0;
-	fractal->z_y = 270;
-	fractal->color = 0xccf1ff;
 }
 
 void	error_msg(int i)
