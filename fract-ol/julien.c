@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbro.c                                        :+:      :+:    :+:   */
+/*   julien.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/26 13:03:28 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/26 16:23:07 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/09/26 14:25:24 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/09/26 16:23:12 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	color_calc(t_fract *fractol, double x, double y)
-{
-	double	tmp;
-	int		clr;
-	int		iter;
-
-	iter = 0;
-	while ((x * x + y * y <= 4) && (iter < fractol->iter))
-	{
-		tmp = x * x - y * y + fractol->c_re;
-		y = 2.0 * x * y + fractol->c_i;
-		x = tmp;
-		iter++;
-	}
-	if (iter == fractol->iter)
-		return (0x000000);
-	clr = fractol->color * iter;
-	return (clr);
-}
-
-void	mandelbrot_set(t_fract *fractol)
+void	julia_set(t_fract *fractol)
 {
 	int	clr;
 	int	x;
@@ -45,9 +25,9 @@ void	mandelbrot_set(t_fract *fractol)
 		x = 0;
 		while (x < WIDTH)
 		{
-			fractol->c_i = fractol->y + (y - HEIGHT / 2) / fractol->scale;
-			fractol->c_re = fractol->x + (x - WIDTH / 2) / fractol->scale;
-			clr = color_calc(fractol, 0, 0);
+			fractol->z_y = fractol->y + (y - HEIGHT / 2) / fractol->scale;
+			fractol->z_x = fractol->x + (x - WIDTH / 2) / fractol->scale;
+			clr = color_calc(fractol, fractol->z_x, fractol->z_y);
 			((int *)fractol->addr)[y * WIDTH + x] = clr;
 			x++;
 		}
