@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 14:05:27 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/26 16:23:17 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:26:59 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH_HEIGHT 800
 
 typedef struct s_fract
 {
@@ -51,6 +50,6 @@ int		action(int action, t_fract *fractal);
 int		mouse_hook(int button, int x, int y, void *param);
 void	hooks(t_fract *fractal);
 void	mandelbrot_set(t_fract *fractal);
-void	julia_set(t_fract *fractol);
+void	newton_julia_set(t_fract *fractol);
 int		color_calc(t_fract *fractol, double x, double y);
 #endif

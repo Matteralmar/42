@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:13 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/26 16:23:18 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:27:30 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	init_fractal(t_fract *fractal)
 {
-	fractal->iter = 40;
+	if (fractal->type == 1 || fractal->type == 2)
+		fractal->iter = 40;
+	else
+		fractal->iter = 20;
 	fractal->zoom = 1;
-	fractal->scale = WIDTH / (fractal->zoom * 4);
+	fractal->scale = WIDTH_HEIGHT / (fractal->zoom * 4);
 	fractal->color = 0xe6ccff;
 	fractal->x = 0;
 	fractal->y = 0;
@@ -42,11 +45,10 @@ void	draw(t_fract *fractal)
 	if (fractal->type == 1)
 		mandelbrot_set(fractal);
 	else if (fractal->type == 2)
-		julia_set(fractal);
-	// else if (fractal->type == 3)
-	// 	newton_set(fractal);
+		newton_julia_set(fractal);
+	else if (fractal->type == 3)
+		newton_julia_set(fractal);
 	mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img, 0, 0);
-
 }
 
 int	what_set(t_fract *fractal, char **av)
@@ -66,7 +68,6 @@ int	what_set(t_fract *fractal, char **av)
 	return (0);
 }
 
-
 int	main(int ac, char **av)
 {
 	t_fract	fractal;
@@ -76,14 +77,15 @@ int	main(int ac, char **av)
 		fractal.mlx = mlx_init();
 		if (!fractal.mlx)
 			return (error_msg(1), 1);
-		fractal.win = mlx_new_window(fractal.mlx, WIDTH, HEIGHT, "fract-ol");
+		fractal.win = mlx_new_window(fractal.mlx, WIDTH_HEIGHT,
+				WIDTH_HEIGHT, "fract-ol");
 		if (!fractal.win)
 			return (error_msg(1), 1);
-		fractal.img = mlx_new_image(fractal.mlx, WIDTH, HEIGHT);
+		fractal.img = mlx_new_image(fractal.mlx, WIDTH_HEIGHT, WIDTH_HEIGHT);
 		if (!fractal.img)
 			return (error_msg(1), 1);
 		fractal.addr = mlx_get_data_addr(fractal.img,
-		&fractal.bits_per_pixel, &fractal.line_len, &fractal.endian);
+				&fractal.bits_per_pixel, &fractal.line_len, &fractal.endian);
 		if (!fractal.addr)
 			return (error_msg(1), 1);
 		what_set(&fractal, av);
@@ -95,4 +97,3 @@ int	main(int ac, char **av)
 		return (error_msg(2), 1);
 	return (0);
 }
-

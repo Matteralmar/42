@@ -6,7 +6,7 @@
 #    By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/18 14:01:32 by gvasylie          #+#    #+#              #
-#    Updated: 2025/09/26 16:23:11 by gvasylie         ###   ########.fr        #
+#    Updated: 2025/09/27 13:47:05 by gvasylie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = ./libft/libft.a
 SRC = fract-ol.c \
 	hooks.c \
 	mandelbro.c \
-	julien.c
+	newtons_julienne.c
 
 OBJ = $(SRC:.c=.o)
 
