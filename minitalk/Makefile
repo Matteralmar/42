@@ -5,50 +5,42 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/09/15 12:51:00 by gvasylie          #+#    #+#              #
-#    Updated: 2025/09/15 12:51:45 by gvasylie         ###   ########.fr        #
+#    Created: 2025/09/29 11:28:25 by gvasylie          #+#    #+#              #
+#    Updated: 2025/09/29 11:28:25 by gvasylie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = minitalk
+
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
-PRINTF = ./printf/libftprintf.a
-CLIENT_SRCS = client.c
-SERVER_SRCS = server.c
-CLIENT_NAME = client
-SERVER_NAME = server
-CLIENT_BONUS_SRCS = client_bonus.c
-SERVER_BONUS_SRCS = server_bonus.c
-CLIENT_BONUS_NAME = client_bonus
-SERVER_BONUS_NAME = server_bonus
+FLAGS = -Wall -Wextra -Werror
+CLIENT = client
+SERVER = server
+SRC_CLIENT = client.c
+SRC_SERVER = server.c
+CLIENT_BONUS = client_bonus
+SERVER_BONUS = server_bonus
+SRC_CLIENT_BONUS = client_bonus.c
+SRC_SERVER_BONUS = server_bonus.c
+LIBFT = ./libft/libft.a
+OBJ = $(SRC:.c=.o)
 
-all: $(CLIENT_NAME) $(SERVER_NAME)
+all: $(NAME)
 
-$(CLIENT_NAME): $(CLIENT_SRCS) $(PRINTF)
-	$(CC) $(CFLAGS) -o $@ $(CLIENT_SRCS) $(PRINTF)
-
-$(SERVER_NAME): $(SERVER_SRCS) $(PRINTF)
-	$(CC) $(CFLAGS) -o $@ $(SERVER_SRCS) $(PRINTF)
-
-$(CLIENT_BONUS_NAME): $(CLIENT_BONUS_SRCS) $(PRINTF)
-	$(CC) $(CFLAGS) -o $@ $(CLIENT_BONUS_SRCS) $(PRINTF)
-
-$(SERVER_BONUS_NAME): $(SERVER_BONUS_SRCS) $(PRINTF)
-	$(CC) $(CFLAGS) -o $@ $(SERVER_BONUS_SRCS) $(PRINTF)
-
-$(PRINTF):
-	$(MAKE) -C ./printf
-
+$(NAME): $(OBJ)
+	make -C ./libft
+	$(CC) -o $(CLIENT) $(SRC_CLIENT) $(LIBFT)
+	$(CC) -o $(SERVER) $(SRC_SERVER) $(LIBFT)
 clean:
-	$(MAKE) -C ./printf clean
-	rm -f *.o
-
-fclean: clean
-	$(MAKE) -C ./printf fclean
-	rm -f $(CLIENT_NAME) $(SERVER_NAME) $(CLIENT_BONUS_NAME) $(SERVER_BONUS_NAME)
-
+	make clean -C ./libft
+	rm -rf *.o 
+fclean:
+	make fclean -C ./libft
+	rm -rf *.o client server client_bonus server_bonus
+bonus:
+	make -C ./libft
+	$(CC) -o $(CLIENT_BONUS) $(SRC_CLIENT_BONUS) $(LIBFT)
+	$(CC) -o $(SERVER_BONUS) $(SRC_SERVER_BONUS) $(LIBFT)
 re: fclean all
 
-bonus: $(CLIENT_BONUS_NAME) $(SERVER_BONUS_NAME)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

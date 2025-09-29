@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 14:05:27 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/27 14:26:59 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:35:36 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH_HEIGHT 800
+# define WIDTH 800
+# define HEIGHT 800
 
 typedef struct s_fract
 {

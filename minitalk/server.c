@@ -5,39 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 12:51:13 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/15 12:51:44 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/09/28 15:00:59 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/09/29 11:20:59 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "printf/ft_printf.h"
+#include "./libft/libft.h"
 
-void	handle_signal(int signal)
+void	take_signal(int sig)
 {
-	static unsigned char	chr;
-	static int				b_ind;
+	static unsigned char	letter;
+	static int				bit_position;
 
-	chr |= (signal == SIGUSR1);
-	b_ind++;
-	if (b_ind == 8)
+	if (sig == SIGUSR1)
+		letter |= (1 << bit_position);
+	bit_position++;
+	if (bit_position == 8)
 	{
-		if (chr == '\0')
-			ft_printf("\n");
+		if (letter != '\0')
+			write(1, &letter, 1);
 		else
-			ft_printf("%c", chr);
-		b_ind = 0;
-		chr = 0;
+			write(1, "\n", 1);
+		bit_position = 0;
+		letter = 0;
 	}
-	else
-		chr <<= 1;
 }
 
 int	main(void)
 {
-	printf("%d\n", getpid());
-	signal(SIGUSR1, handle_signal);
-	signal(SIGUSR2, handle_signal);
+	pid_t	pid;
+	size_t	len;
+	char	*pid_str;
+
+	pid = getpid();
+	pid_str = ft_itoa(pid);
+	if (!pid_str)
+		return (1);
+	len = ft_strlen(pid_str);
+	write(1, pid_str, len);
+	write(1, "\n", 1);
+	free(pid_str);
+	signal(SIGUSR1, take_signal);
+	signal(SIGUSR2, take_signal);
 	while (1)
 		pause();
 	return (0);

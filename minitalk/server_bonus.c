@@ -5,49 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 12:51:09 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/15 12:51:43 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/09/28 17:53:48 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/09/29 11:20:58 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "printf/ft_printf.h"
+#include "./libft/libft.h"
 
-void	handle_signal(int signal, siginfo_t *inf, void *context)
+void	take_signal(int sig, siginfo_t *pid, void *none)
 {
-	static unsigned char	chr;
-	static int				b_ind;
+	static unsigned char	letter;
+	static int				bit_position;
 
-	(void)context;
-	chr |= (signal == SIGUSR1);
-	b_ind++;
-	if (b_ind == 8)
+	if (sig == SIGUSR1)
+		letter |= (1 << bit_position);
+	bit_position++;
+	if (bit_position == 8)
 	{
-		if (chr == '\0')
-			ft_printf("\n");
+		if (letter != '\0')
+			write(1, &letter, 1);
 		else
-			ft_printf("%c", chr);
-		b_ind = 0;
-		chr = 0;
+			write(1, "\n", 1);
+		bit_position = 0;
+		letter = 0;
 	}
-	else
-		chr <<= 1;
-	if (signal == SIGUSR1)
-		kill(inf->si_pid, SIGUSR1);
-	else if (signal == SIGUSR2)
-		kill(inf->si_pid, SIGUSR2);
+	if (sig == SIGUSR1)
+		kill(pid->si_pid, SIGUSR1);
+	else if (sig == SIGUSR2)
+		kill(pid->si_pid, SIGUSR2);
 }
 
 int	main(void)
 {
-	struct sigaction	sa;
+	pid_t				pid;
+	size_t				len;
+	char				*pid_str;
+	struct sigaction	sig_strct;
 
-	sa.sa_sigaction = &handle_signal;
-	sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
-	printf("%d\n", getpid());
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
+	sig_strct.sa_sigaction = &take_signal;
+	sig_strct.sa_flags = SA_SIGINFO;
+	sigemptyset(&sig_strct.sa_mask);
+	pid = getpid();
+	pid_str = ft_itoa(pid);
+	if (!pid_str)
+		return (1);
+	len = ft_strlen(pid_str);
+	write(1, pid_str, len);
+	write(1, "\n", 1);
+	free(pid_str);
+	sigaction(SIGUSR1, &sig_strct, NULL);
+	sigaction(SIGUSR2, &sig_strct, NULL);
 	while (1)
 		pause();
 	return (0);

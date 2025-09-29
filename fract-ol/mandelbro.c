@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:28 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/27 14:28:30 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:36:02 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,15 @@ void	mandelbrot_set(t_fract *fractol)
 
 	y = 0;
 	mlx_clear_window(fractol->mlx, fractol->win);
-	while (y < WIDTH_HEIGHT)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < WIDTH_HEIGHT)
+		while (x < WIDTH)
 		{
-			fractol->c_i = fractol->y + (y - WIDTH_HEIGHT / 2) / fractol->scale;
-			fractol->c_re = fractol->x
-				+ (x - WIDTH_HEIGHT / 2) / fractol->scale;
+			fractol->c_i = fractol->y + (y - HEIGHT / 2) / fractol->scale;
+			fractol->c_re = fractol->x + (x - WIDTH / 2) / fractol->scale;
 			clr = color_calc(fractol, 0, 0);
-			((int *)fractol->addr)[y * WIDTH_HEIGHT + x] = clr;
+			((int *)fractol->addr)[y * WIDTH + x] = clr;
 			x++;
 		}
 		y++;

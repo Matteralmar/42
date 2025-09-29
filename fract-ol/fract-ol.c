@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:13 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/27 14:27:30 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:35:24 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_fractal(t_fract *fractal)
 	else
 		fractal->iter = 20;
 	fractal->zoom = 1;
-	fractal->scale = WIDTH_HEIGHT / (fractal->zoom * 4);
+	fractal->scale = WIDTH / (fractal->zoom * 4);
 	fractal->color = 0xe6ccff;
 	fractal->x = 0;
 	fractal->y = 0;
@@ -77,11 +77,10 @@ int	main(int ac, char **av)
 		fractal.mlx = mlx_init();
 		if (!fractal.mlx)
 			return (error_msg(1), 1);
-		fractal.win = mlx_new_window(fractal.mlx, WIDTH_HEIGHT,
-				WIDTH_HEIGHT, "fract-ol");
+		fractal.win = mlx_new_window(fractal.mlx, WIDTH, HEIGHT, "fract-ol");
 		if (!fractal.win)
 			return (error_msg(1), 1);
-		fractal.img = mlx_new_image(fractal.mlx, WIDTH_HEIGHT, WIDTH_HEIGHT);
+		fractal.img = mlx_new_image(fractal.mlx, WIDTH, HEIGHT);
 		if (!fractal.img)
 			return (error_msg(1), 1);
 		fractal.addr = mlx_get_data_addr(fractal.img,

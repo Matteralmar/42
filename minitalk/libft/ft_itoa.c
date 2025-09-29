@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_numb.c                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/07 14:59:18 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/06/07 14:59:18 by gvasylie         ###   ########.fr       */
+/*   Created: 2025/05/29 13:19:28 by gvasylie          #+#    #+#             */
+/*   Updated: 2025/05/29 13:19:28 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 static	size_t	len_calc(long number)
 {
@@ -33,23 +33,39 @@ static	size_t	len_calc(long number)
 	return (len);
 }
 
-static void	print_numb_recursive(long n)
+static char	*number_to_str(long number, size_t len)
 {
-	if (n < 0)
+	char	*str;
+	long	n;
+
+	n = number;
+	str = (char *)malloc(len + 1);
+	if (!str)
+		return (NULL);
+	if (number < 0)
 	{
-		write(1, "-", 1);
-		n = -n;
+		str[0] = '-';
+		number = -number;
 	}
-	if (n >= 10)
-		print_numb_recursive(n / 10);
-	write(1, &"0123456789"[n % 10], 1);
+	str[len] = '\0';
+	len--;
+	while (len)
+	{
+		str[len] = (number % 10) + '0';
+		number /= 10;
+		len--;
+	}
+	if (n >= 0)
+		str[0] = (number % 10) + '0';
+	return (str);
 }
 
-size_t	pr_numb(int n)
+char	*ft_itoa(int n)
 {
 	size_t	len;
+	long	number;
 
-	len = len_calc((long)n);
-	print_numb_recursive((long)n);
-	return (len);
+	number = n;
+	len = len_calc(number);
+	return (number_to_str(number, len));
 }
