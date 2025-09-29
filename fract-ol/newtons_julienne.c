@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 14:25:24 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/27 14:28:45 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:23:32 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,18 @@ void	newton_julia_set(t_fract *fractol)
 
 	y = 0;
 	mlx_clear_window(fractol->mlx, fractol->win);
-	while (y < WIDTH_HEIGHT)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < WIDTH_HEIGHT)
+		while (x < WIDTH)
 		{
-			fractol->z_y = fractol->y + (y - WIDTH_HEIGHT / 2) / fractol->scale;
-			fractol->z_x = fractol->x + (x - WIDTH_HEIGHT / 2) / fractol->scale;
+			fractol->z_y = fractol->y + (y - HEIGHT / 2) / fractol->scale;
+			fractol->z_x = fractol->x + (x - WIDTH / 2) / fractol->scale;
 			if (fractol->type == 2)
 				clr = color_calc(fractol, fractol->z_x, fractol->z_y);
 			else
 				clr = newton_calc(fractol, fractol->z_x, fractol->z_y);
-			((int *)fractol->addr)[y * WIDTH_HEIGHT + x] = clr;
+			((int *)fractol->addr)[y * HEIGHT + x] = clr;
 			x++;
 		}
 		y++;

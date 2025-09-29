@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:13 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/27 14:35:24 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:29:10 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_fractal(t_fract *fractal)
 	if (fractal->type == 1 || fractal->type == 2)
 		fractal->iter = 40;
 	else
-		fractal->iter = 20;
+		fractal->iter = 100;
 	fractal->zoom = 1;
 	fractal->scale = WIDTH / (fractal->zoom * 4);
 	fractal->color = 0xe6ccff;
@@ -79,14 +79,14 @@ int	main(int ac, char **av)
 			return (error_msg(1), 1);
 		fractal.win = mlx_new_window(fractal.mlx, WIDTH, HEIGHT, "fract-ol");
 		if (!fractal.win)
-			return (error_msg(1), 1);
+			return (destroy(&fractal), error_msg(1), 1);
 		fractal.img = mlx_new_image(fractal.mlx, WIDTH, HEIGHT);
 		if (!fractal.img)
-			return (error_msg(1), 1);
+			return (destroy(&fractal), error_msg(1), 1);
 		fractal.addr = mlx_get_data_addr(fractal.img,
 				&fractal.bits_per_pixel, &fractal.line_len, &fractal.endian);
 		if (!fractal.addr)
-			return (error_msg(1), 1);
+			return (destroy(&fractal), error_msg(1), 1);
 		what_set(&fractal, av);
 		draw(&fractal);
 		hooks(&fractal);
