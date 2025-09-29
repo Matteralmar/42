@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:23 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/29 12:45:00 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/29 17:08:24 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	mouse_hook(int button, int x, int y, void *param)
 		fractal->zoom *= 1.1;
 	else if (button == 4)
 		fractal->zoom *= 0.9;
-	fractal->scale = (double)WIDTH / (4.0 * fractal->zoom);
+	fractal->scale = 600.0 / (4.0 * fractal->zoom);
 	draw(fractal);
 	return (0);
 }

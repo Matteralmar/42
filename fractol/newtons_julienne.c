@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 14:25:24 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/29 12:23:32 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/29 17:15:33 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ int	newton_calc(t_fract *fractol, double x, double y)
 		y -= calc_imag(x2, y2, x, y);
 		x -= calc_real(x2, y2, x, y);
 		if (((x - 1) * (x - 1)) + y * y < tol * tol)
-			return (0xff0000 * iter);
+			return (RED * iter);
 		if ((x + 0.5) * (x + 0.5) + (y - sqrt(3) / 2)
 			* (y - sqrt(3) / 2) < tol * tol)
-			return (0x00ff00 * iter);
+			return (GREEN * iter);
 		if ((x + 0.5) * (x + 0.5) + (y + sqrt(3) / 2)
 			* (y + sqrt(3) / 2) < tol * tol)
-			return (0x0000ff * iter);
+			return (BLUE * iter);
 		iter++;
 	}
-	return (0x000000);
+	return (BLACK);
 }
 
 void	newton_julia_set(t_fract *fractol)
@@ -80,18 +80,18 @@ void	newton_julia_set(t_fract *fractol)
 
 	y = 0;
 	mlx_clear_window(fractol->mlx, fractol->win);
-	while (y < HEIGHT)
+	while (y < 600)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < 600)
 		{
-			fractol->z_y = fractol->y + (y - HEIGHT / 2) / fractol->scale;
-			fractol->z_x = fractol->x + (x - WIDTH / 2) / fractol->scale;
+			fractol->z_y = fractol->y + (y - 600 / 2) / fractol->scale;
+			fractol->z_x = fractol->x + (x - 600 / 2) / fractol->scale;
 			if (fractol->type == 2)
 				clr = color_calc(fractol, fractol->z_x, fractol->z_y);
 			else
 				clr = newton_calc(fractol, fractol->z_x, fractol->z_y);
-			((int *)fractol->addr)[y * HEIGHT + x] = clr;
+			((int *)fractol->addr)[y * 600 + x] = clr;
 			x++;
 		}
 		y++;

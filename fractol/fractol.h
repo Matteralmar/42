@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 14:05:27 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/27 14:35:36 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/29 17:15:03 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH 800
-# define HEIGHT 800
+# define BLACK 0x000000
+# define RED 0xff0000
+# define GREEN 0x00ff00
+# define BLUE 0x0000ff
 
 typedef struct s_fract
 {
