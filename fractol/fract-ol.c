@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:13 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/29 13:29:10 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:59:52 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_fractal(t_fract *fractal)
 {
 	if (fractal->type == 1 || fractal->type == 2)
-		fractal->iter = 40;
+		fractal->iter = 140;
 	else
 		fractal->iter = 100;
 	fractal->zoom = 1;
