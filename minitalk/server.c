@@ -6,31 +6,14 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 15:00:59 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/09/29 11:20:59 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/10/01 14:12:14 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include "./libft/libft.h"
 
-void	take_signal(int sig)
-{
-	static unsigned char	letter;
-	static int				bit_position;
-
-	if (sig == SIGUSR1)
-		letter |= (1 << bit_position);
-	bit_position++;
-	if (bit_position == 8)
-	{
-		if (letter != '\0')
-			write(1, &letter, 1);
-		else
-			write(1, "\n", 1);
-		bit_position = 0;
-		letter = 0;
-	}
-}
+static void	take_signal(int sig);
 
 int	main(void)
 {
@@ -51,4 +34,22 @@ int	main(void)
 	while (1)
 		pause();
 	return (0);
+}
+
+static void	take_signal(int sig)
+{
+	static int				bit_position;
+	static unsigned char	letter;
+
+	if (sig == SIGUSR1)
+		letter |= (1 << bit_position);
+	if (++bit_position == 8)
+	{
+		bit_position = 0;
+		if (letter != '\0')
+			write(1, &letter, 1);
+		else
+			write(1, "\n", 1);
+		letter = 0;
+	}
 }
