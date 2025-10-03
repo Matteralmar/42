@@ -6,16 +6,16 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:13 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/10/01 18:03:15 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:50:49 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	init_fractal(t_fract *fractal)
+void	init_fractal(t_fract *fractal)
 {
 	if (fractal->type == 1 || fractal->type == 2)
-		fractal->iter = 140;
+		fractal->iter = 40;
 	else
 		fractal->iter = 100;
 	fractal->zoom = 1;
@@ -32,7 +32,7 @@ static void	init_fractal(t_fract *fractal)
 	}
 }
 
-static void	error_msg(int i)
+void	error_msg(int i)
 {
 	if (i == 1)
 		ft_putendl_fd("Error: MLX initialization failed", 2);
@@ -51,7 +51,7 @@ void	draw(t_fract *fractal)
 	mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img, 0, 0);
 }
 
-static int	what_set(t_fract *fractal, char **av)
+int	what_set(t_fract *fractal, char **av)
 {
 	if (!ft_strncmp(av[1], "Mandelbrot", 11))
 		fractal->type = 1;

@@ -6,11 +6,11 @@
 #    By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/18 14:01:32 by gvasylie          #+#    #+#              #
-#    Updated: 2025/09/27 13:47:05 by gvasylie         ###   ########.fr        #
+#    Updated: 2025/10/03 13:50:54 by gvasylie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fract-ol
+NAME = fractol
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra

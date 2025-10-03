@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:03:23 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/10/01 18:06:16 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:50:53 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	destroy(t_fract *fractal)
 	exit(0);
 }
 
-static int	mouse_hook(int button, int x, int y, void *param)
+int	mouse_hook(int button, int x, int y, void *param)
 {
 	t_fract	*fractal;
 	double	old_re;
@@ -38,10 +38,10 @@ static int	mouse_hook(int button, int x, int y, void *param)
 	fractal = (t_fract *)param;
 	old_re = fractal->x + (x - WID_HEI / 2) / fractal->scale;
 	old_im = fractal->y + (y - WID_HEI / 2) / fractal->scale;
-	if (button == 4)
-		fractal->zoom *= 0.9;
-	else if (button == 5)
-		fractal->zoom *= 1.1;
+	if (button == SCROLL_UP)
+		fractal->zoom *= 0.95;
+	else if (button == SCROLL_DOWN)
+		fractal->zoom *= 1.05;
 	fractal->scale = WID_HEI / (4.0 * fractal->zoom);
 	new_re = fractal->x + (x - WID_HEI / 2) / fractal->scale;
 	new_im = fractal->y + (y - WID_HEI / 2) / fractal->scale;
@@ -51,7 +51,7 @@ static int	mouse_hook(int button, int x, int y, void *param)
 	return (0);
 }
 
-static int	action(int action, t_fract *fractal)
+int	action(int action, t_fract *fractal)
 {
 	if (action == UP)
 		fractal->y -= 0.1 * fractal->zoom;
@@ -65,7 +65,7 @@ static int	action(int action, t_fract *fractal)
 		fractal->color += 99;
 	if (action == '2')
 		fractal->color -= 99;
-	if (action == 65307)
+	if (action == ESC)
 		destroy(fractal);
 	if (action == 'q')
 		fractal->c_i += 0.01;

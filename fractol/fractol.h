@@ -6,7 +6,7 @@
 /*   By: gvasylie <gvasylie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 14:05:27 by gvasylie          #+#    #+#             */
-/*   Updated: 2025/10/01 18:06:35 by gvasylie         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:50:51 by gvasylie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
+# define ESC 65307
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
 typedef struct s_fract
 {
