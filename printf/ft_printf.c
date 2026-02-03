@@ -270,7 +270,7 @@ int main()
 	printf(" %d\n", ft_printf("ft_printf just print hex: %x %X", 0xff, 0xff));
 	printf(" %d\n", printf("printf just print hex: %x %X", 0xff, 0xff) + 3);
 
-	printf(" %d\n", ft_printf("ft_printf just print zeroes hex: %x %X", 0x0, 0x0));
+	printf(" %d\n", ft_printf("ft_prinnulltf just print zeroes hex: %x %X", 0x0, 0x0));
 	printf(" %d\n", printf("printf just print zeroes hex: %x %X", 0x0, 0x0) + 3);
 
 	printf(" %d\n", ft_printf("ft_printf just print hex overflow: %x %X", 0xFFFFFFFF, 0xFFFFFFFF));
@@ -300,7 +300,7 @@ int main()
 
 	p = 0x0;
 	printf(" %d\n", ft_printf("ft_printf hex null pointer: %p", p));
-	printf(" %d\n", printf("printf hex null pointer: %p", p) + 3);
+	printf(" %d\n", printf("printf hex null pointer: %p", NULL) + 3);
 
 	printf(" %d\n", ft_printf("ft_printf print mix flags: %%%p%%%p", 0x0, 0x0));
 	printf(" %d\n", printf("printf print mix flags: %%%p%%%p", 0x0, 0x0) + 3);
