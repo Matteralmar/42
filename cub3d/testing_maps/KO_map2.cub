@@ -1,0 +1,20 @@
+NO ./path_to_the_north_texture
+SO SO textures/south.xpm
+WE ./path_to_the_west_texture
+EA 
+
+F 220, 10 ,225
+C 225,30,0
+
+
+
+
+1111111111
+1       11
+1        1
+1        1
+1        1
+1        1
+1111111111
+11111N0001
+1111111111
