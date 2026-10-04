@@ -1,0 +1,188 @@
+# Minishell Test Commands
+# Copy and paste these commands into your minishell to test
+
+# ===========================================
+# 1. COMPLEX PIPE AND REDIRECTION
+# ===========================================
+cat test1 | grep a > test2 | echo a $USER >> test2 | cat test1 | grep b | >> test2 | echo b $USER >> test2 | cat test1 | grep c >> test2 | echo c $USER >> test2 | cat test1 | grep d >> test2 | echo d $USER | cat test1 | grep e >> test2 | echo e $USER >> test2
+
+# ===========================================
+# 2. BASIC COMMANDS
+# ===========================================
+/bin/ls
+/bin/ls -a
+echo -n hi
+
+# ===========================================
+# 3. EXIT TESTS
+# ===========================================
+exit 125
+exit hi
+exit 1 2 3
+
+# ===========================================
+# 4. EXIT STATUS ($?)
+# ===========================================
+/bin/ls b
+echo $?
+expr $? + $?
+
+# ===========================================
+# 5. QUOTES - DOUBLE QUOTES
+# ===========================================
+echo "cat lol.c   |   cat > lol.c"
+echo "skhsk 9sus9u0s9snsjs jskjsksk"
+
+# ===========================================
+# 6. QUOTES - SINGLE QUOTES
+# ===========================================
+echo 'cat lol.c   |   cat > lol.c'
+echo 'echo $USER  |   cat > lol.c | echo * && echo "!!!"'
+echo '' hi '' 'hi'
+echo '$USER'
+
+# ===========================================
+# 7. ENVIRONMENT VARIABLES
+# ===========================================
+env | grep PWD
+echo $USER
+echo "$USER"
+
+# ===========================================
+# 8. EXPORT
+# ===========================================
+export ABC=123
+export BC=23
+export 4A=A4
+export AB1=11 AB2=22 AB3=33
+env | grep AB
+export
+
+# ===========================================
+# 9. UNSET
+# ===========================================
+unset 4A
+unset ABC
+unset
+env | grep BC
+unset AB1 AB3
+env | grep AB
+
+# ===========================================
+# 10. CD AND PWD
+# ===========================================
+/bin/ls
+cd .
+/bin/ls
+/bin/ls ..
+cd ..
+/bin/ls
+pwd
+
+# ===========================================
+# 11. RELATIVE PATH
+# ===========================================
+../../minishell
+
+# ===========================================
+# 12. ENVIRONMENT PATH
+# ===========================================
+export PATH=~/42core/3_minishell/tluknew/.tests/bash/bdir:~/42core/3_minishell/tluknew/.tests/bash/cdir:~/aug_13/tests/bash/adir
+a.out
+
+# ===========================================
+# 13. REDIRECTIONS
+# ===========================================
+# Test with existing file
+cat < test1
+echo test > test2
+echo more >> test2
+
+# Test with non-existent file
+cat < nonexistent
+
+# Test with no permissions (need to chmod 000 a file first)
+# chmod 000 noperm
+# cat < noperm
+
+# ===========================================
+# 14. PIPES
+# ===========================================
+cat file1 | grep a | wc -c
+ls | grep test | wc -l
+
+# ===========================================
+# 15. HEREDOC (requires interactive input)
+# ===========================================
+cat <<stop | grep k | wc -w
+keyboard
+testing
+stop
+
+# Heredoc with cat
+<< stop cat
+
+# ===========================================
+# 16. LOGICAL OPERATORS (AND, OR)
+# ===========================================
+cat xs && (echo b || echo c)
+cat xs && echo b || echo c
+echo test && echo success
+false || echo fallback
+true && echo works || echo fails
+false && echo fails || echo works
+
+# ===========================================
+# 17. WILDCARDS
+# ===========================================
+echo m*
+echo *l
+echo *i*
+echo m*l
+echo *.c
+echo *.md
+echo *
+
+# ===========================================
+# 18. SURPRISE TEST
+# ===========================================
+echo '"$USER"'
+
+# ===========================================
+# 19. MULTIPLE REDIRECTIONS (EDGE CASES)
+# ===========================================
+<< stop cat | grep kk >> test00 |echo bye<test00 >test00 grep bye
+<< stop cat | grep kk >> test00 |echo bye | >test00 grep bye
+<< stop cat | grep kk >> test00 |echo bye | |>test00 grep bye
+
+# ===========================================
+# 20. SIGNAL TESTS (manual interaction)
+# ===========================================
+# Start heredoc then press Ctrl-C
+cat << stop
+
+# Run cat then press Ctrl-C
+cat
+
+# Run cat then press Ctrl-D
+cat
+
+# Run cat then press Ctrl-\
+cat
+
+# Press Ctrl-D in empty prompt (should exit)
+
+# ===========================================
+# SETUP COMMANDS (run these first)
+# ===========================================
+# Create test files
+echo -e "apple\nbanana\ncarrot\ndate\neggplant" > test1
+echo "test content for file1" > file1
+touch test00
+touch xs
+chmod 644 test00
+
+# ===========================================
+# CLEANUP COMMANDS (run after testing)
+# ===========================================
+rm -f test1 test2 test00 file1 newfile newfile2 xs lol.c noperm
