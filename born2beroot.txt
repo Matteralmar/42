@@ -1,0 +1,79 @@
+Signature check/create
+sha1sum Born2beroot.vdi > sign.txt
+sha1sum -c sign.txt
+
+Check no graphical interface
+ls /usr/bin/*session
+
+SSH connect
+ssh gvasylie@127.0.0.1 -p 4241
+
+Check UFW
+sudo systemctl status ufw
+
+Check SSH service
+sudo systemctl status ssh
+
+Check OS
+uname --kernel-version
+
+Check user and group
+getent group sudo user42
+
+Create user and check password
+sudo adduser ...
+chage -l ...
+sudo chage -M 30 -m 2 -W 7 ...
+
+Password aging
+nano /etc/login.defs
+
+Complexity rules
+nano /etc/pam.d/common-password
+
+Create group/add user to the group
+sudo addgroup ...
+getent group ...
+sudo adduser <usr> <grp>
+
+Hostname check
+hostname
+
+Change hostname
+sudo nano /etc/hostname
+sudo nano /etc/hosts
+sudo reboot
+hostname
+
+Check partitions
+lsblk
+
+Sudo check
+sudo --version
+sudo adduser <usr> <grp>
+sudo apt update
+sudo reboot
+sudo add group ...
+sudo add user ...
+cd /var/log/sudo
+nano sudo.log
+sudo visudo
+
+Check UFW
+dpkg -s ufw
+systemctl statu ufw
+sudo service ufw status
+sudo ufw allow ...
+sudo ufw allow ...
+sudo ufw status
+sudo ufw delete allow ...
+
+Check SSH
+which ssh
+sudo service ssh status
+sudo ss -tulnp | grep tcp
+ssh ...@127.0.0.1 -p 4241
+
+Script check
+sudo nano /usr/local/bin/monitoring.sh
+sudo crontab -u root -e
